@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+service Node {
+    rpc Ping (PingRequest) returns (PingResponse) {}
+    rpc GetHeight (GetHeightRequest) returns (HeightResponse) {}
+    rpc GetLastBlock (GetLastBlockRequest) returns (Block) {}
+    rpc GetBlockByIndex (GetBlockByIndexRequest) returns (Block) {}
+    rpc GetMempool (GetMempoolRequest) returns (Mempool) {}
+}
+
+message PingRequest {
+
+}
+message PingResponse {
+    uint32 time = 1;
+}
+
+message GetHeightRequest {
+
+}
+message HeightResponse {
+    uint64 height = 1;
+}
+
+message Transaction {
+    bytes sender = 1;
+    bytes receiver = 2;
+    float amount = 3;
+    bytes data = 4;
+    uint32 nonce = 5;
+    bytes signature = 6;
+}
+
+message Block {
+    uint64 index = 1;
+    uint32 timestamp = 2;
+    bytes hash = 3;
+    bytes phash = 4;
+    repeated Transaction txs = 5;
+    bytes miner = 6;
+    uint64 pow = 7;
+    uint32 diff = 8;
+}
+
+message GetLastBlockRequest {
+
+}
+
+message GetBlockByIndexRequest {
+    uint64 index = 1;
+}
+
+message GetMempoolRequest {
+
+}
+message Mempool {
+    repeated Transaction mempool = 1;
+}
